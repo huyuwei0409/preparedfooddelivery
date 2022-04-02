@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Comparison between China and the U.S. in Prepared Food Delivery"
+author: "Qingyang He, Yuwei Hu"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
