@@ -83,11 +83,11 @@ grid.arrange(gr,gu,ncol=2, nrow =1)
 * The ratio of platform delivery to restaurant delivery is increasing year after year, as shown in the first graph. Restaurant delivery income is roughly 1.5 times that of platform delivery in 2017, and by 2021, restaurant and platform delivery revenue becomes virtually equal. Overall, both companies' revenue is expanding year after year. 
 * The number and ratio of users are trending in the same direction as market revenue. Revenue and user numbers both climbed moderately from 2017 to 2019, before climbing dramatically from 2020 to 2021.
 
-## demand for food delivery analysis
+## Demand for food delivery analysis
 
 In this section, we look at the causes behind the shift in the food delivery market from the demand side. We look into whether the four aspects, such as smartphone usage, working hours, CPI, and food expenditure, can explain the reasons for the changes in the food delivery business.
 
-### smartphone ownership analysis
+### Smartphone ownership analysis
 
 ```{r}
 data<- read_csv("data/after cleaning/smartphone_clean.csv")
@@ -103,7 +103,7 @@ ggplot(data, aes(x=Date, y=proportion,group = 1)) +
 * We first expected that smartphone ownership would be associated to online ordering, notably in terms of platform to customer delivery and number of users. Because more individuals are utilizing smartphones, the likelihood of using an ordering APP will increase. 
 * We can observe from this graph that the use of smartphones increased the most rapidly from 2011 to 2016, and that this is due to technological advancements. Because the data in the preceding section is limited for the years 2017 to 2021, we will also concentrate on these years in this section. We can observe that there was no growth from 2017 to 2018, which corresponds to what we saw in the previous section. In the years that followed, smartphone ownership rose slowly, but that was also due to the fact that smartphone ownership was near saturation.
 
-### working hour analysis
+### Working hour analysis
 ```{r}
 data <- read_csv("data/after cleaning/demand_clean.csv")
 data <- na.omit(data)
@@ -126,7 +126,7 @@ g+geom_smooth(method = "loess", span = .5, se = FALSE,color = "lightcoral")+
 * Overall, between 2012 and 2019, the population's working hour did not change much, although it ebbed and flowed, hovering around 34.5 hours per week. Hours worked dipped substantially during the Covid-19 in 2020 before fast rising, and have risen and fallen dramatically since then, but are still higher generally than before.
 * When compared to our prior market analysis, these large shifts in work hours do not appear to have had an impact on our market, since the long-term trend in work hours is still increasing, which supports our theory that longer work hours will lead to an increase in food delivery users and the market revenue. 
 
-### cpi analysis
+### CPI analysis
 
 ```{r}
 df <- data[,-1] %>% 
@@ -148,7 +148,7 @@ g
 * In this time series graph, we depict the overall CPI and the food CPI separately. The graph shows that the change in CPI is fairly similar to the previous figure, ranging about 0 from 2012 to 2020, with some sporadic large changes. Furthermore, both food and total CPI changes are in one direction and follow the same pattern. And the changes after 2020 are extremely dramatic. First, the food CPI changes by 1.5 in 2020, implying that our earlier food market revenue estimates may be significantly overstated, although we can't quantify this overestimation here due to the complexities of calculations. After that, the overall food CPI increased in long term trend.
 * We could infer from price index analysis that the food delivery market's revenue and growth are not as high as they appear. One of the primary reasons is that food prices have risen, resulting in an increase in the food delivery market's revenue, which may not be as significant if the quantity of food sold is the only factor. This may also be observed in the number of users, as the rise in revenue of the food delivery market is more substantial than the number of users.
 
-### food expenditure analysis
+### Food expenditure analysis
 
 ```{r}
 data <- read_csv("data/after cleaning/food_expenditures_source_clean.csv")
@@ -170,7 +170,7 @@ ggplot(data1, aes(fill=where, y=expenditure, x=as.character(Year))) +
 
 * We first assumed that as the market share of food delivery grew, so would household food consumption away from home. However, from 2010 to 2020, the ratio of food consumed at home to food expenditure away from home stayed at 1. Only during the 2020 outbreak did the percentage of food expenditure spent at home rise slightly, but not significantly.
 
-## supply for food delivery analysis
+## Supply for food delivery analysis
 
 In this section, we examine the relation between key supply-side issues and the food delivery market. These factors include working earning, the number of restaurants, the unemployment rate, and educational level.
 
