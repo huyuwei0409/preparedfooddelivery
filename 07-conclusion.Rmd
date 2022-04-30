@@ -1,2 +1,20 @@
 # Conclusion
 
+## Main takeaways
+
+Based on our analysis of the food delivery market, we have the following finds:
+
+* We observed that the increase in market share was approximately equivalent, however the increase in revenue has altered dramatically in recent years. This shift can be explained by an increase in time worked and earnings, as well as an increase in the number of restaurants.
+*Surprisingly, the number of users has not increased at the same rate as revenue, and we assume this is due to inflation. This disparity is clearly explained by our CPI analysis, which is the nominal value is overestimated by the inflation.
+
+## Limitation
+
+Because this is still a small business, most relevant data is collected in years rather than months, so you won't be able to monitor cyclical changes, only long-term patterns. Because our data is collected through multiple websites, this time interval is not consistent, and we can only analyze using the same time interval, which may result in bias in our analysis results.
+
+## Future directions
+
+Future analysis of the food delivery market can be based on microeconomic and macroeconomic perspectives. In this section, the data is more valid and accurate. We may use region-based heatmaps to track changes in the food delivery market in cities at various stages of growth. We can also examine residents' lifestyles by looking at changes in consumer expenditure. Given the scarcity of data on the food delivery industry, we may also assess the overall market by focusing on the revenue of the top players in delivery apps.
+
+## Lessons learned
+
+We learned throughout this project that collecting and processing real-world data is significantly more difficult than what we studied in class. We spent a lot of time collecting and processing data, and as we were doing so, we were also forming hypotheses about our research, because we needed to assume the variables that could be obtained before we could gather the relevant data. And, when it came to chart design, we created and eliminated a lot of them until we found the one that best represented our data.

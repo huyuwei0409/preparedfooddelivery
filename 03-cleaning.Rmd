@@ -1,1 +1,202 @@
 # Data transformation
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+## Food delivery data
+
+Note: Given that we have multiple types of data obtained through different sources, the workload of the data cleaning phase is significant.
+
+
+For food delivery data, we removed unrelated columns and selected rows based on multiple factor levels - "Online Food Delivery" for Market, and "Revenue" and "Users by Segment" for Chart. We create a new vector called "YEAR", from the information stored in the specifying columns from 3 to 7. Then, we complete the tidying by pivoting "Chart" and "value" to make "Revenue" and "Users by Segment" columns.
+
+```{r}
+colnames(food_delivery_2019_2020)<-c("region","all_food_delivery","online_food_delivery")
+head(food_delivery_2019_2020)
+```
+
+```{r}
+colnames(share_of_delivery_in_food_service_2013_2022)<-c("Year","food_delivery_share_in_food_service")
+head(share_of_delivery_in_food_service_2013_2022)
+```
+
+
+```{r}
+online_food_delivery<-online_food_delivery_2017_2021%>%
+  filter(Market == "Online Food Delivery"&(Chart == "Revenue"|Chart == "Users by Segment"))%>%
+  select("Name","Chart","2017","2018","2019","2020","2021")
+online_food_delivery_clean<- online_food_delivery %>%
+  pivot_longer(cols = c(3:7), names_to = "YEAR")%>%
+  pivot_wider(names_from = "Chart",values_from=value)
+
+head(online_food_delivery_clean)
+```
+
+```{r}
+write.csv(food_delivery_2019_2020, file="./data//after cleaning/food_delivery_world.csv")
+write.csv(share_of_delivery_in_food_service_2013_2022, file="./data//after cleaning/food_delivery_share.csv")
+write.csv(online_food_delivery_clean, file="./data/after cleaning/online_food_delivery_outlook.csv")
+```
+
+
+## Supply data
+
+### Education
+
+Due to the changes in the information collection process, some data were treated as missing data. For the breakdown of education levels in the dataset, it will be a large and unnecessary workload in future comparative analysis, so we divided the education level into 9 major categories. After this, we created the "YEAR" variable as we did in the previous sections and assign the summation of value to it.
+
+```{r}
+education1<- education%>%
+  select(degree = "Detailed years of school","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020")
+education1<- education1[-c(1,2,54:64),]
+education2<- education1 %>%
+  mutate_at(vars(2:12), na_if, "X") %>%
+  mutate_at(vars(2:12), na_if, "N") 
+
+education2[,2:12] <- lapply(education2[,2:12], as.numeric)
+```
+
+```{r}
+education2[2:9,1]<-education2[1,1]
+education2[11:19,1]<-education2[10,1]
+education2[21:25,1]<-education2[20,1]
+education2[27:31,1]<-education2[26,1]
+education2[33:37,1]<-education2[32,1]
+education2[39:40,1]<-education2[38,1]
+education2[42:43,1]<-education2[41,1]
+education2[45:48,1]<-education2[44,1]
+education2[50:51,1]<-education2[49,1]
+
+education3<- education2 %>%
+  pivot_longer(cols = c(2:12), names_to = "Year")
+
+education_clean<- education3%>%
+  group_by(Year,degree)%>%
+  summarise(value = sum(value,na.rm = TRUE))%>%
+  ungroup()
+```
+```{r}
+head(education_clean)
+```
+
+
+### Unemployment
+
+In this section, the data we collected is on monthly basis. To maintain consistency of the previous data, we calculated the average unemployment rate by year.
+
+```{r}
+unemployment_clean<- unemployment %>%
+  select(Year,Value) %>%
+  group_by(Year) %>%
+  summarise(avg_unemployment = mean(Value))
+```
+
+### Restaurant number
+
+Removing irrelevant columns.
+
+```{r}
+private_restaurant_number_clean<- private_restaurant_number%>%
+  select(Year, restaurant_number = Annual)
+```
+
+### Working earning
+```{r}
+colnames(annual_restaurant_worker_earning) <- c("Year","working_earning")
+worker_earning_clean<- annual_restaurant_worker_earning
+```
+
+* Combine unemployment, restaurant number and working earning
+```{r}
+supply_clean<- full_join(worker_earning_clean,private_restaurant_number_clean,unemployment_clean,by='Year')
+supply_clean<- full_join(supply_clean,unemployment_clean,by='Year')
+```
+
+```{r}
+head(supply_clean)
+```
+
+```{r}
+write.csv(education_clean, file="./data//after cleaning/education_clean.csv")
+write.csv(supply_clean, file="./data//after cleaning/supply_clean.csv")
+```
+
+## Demand data
+
+### Smartphone ownership
+
+Removed irrelevant rows
+
+Changed column names and date time format into desired data type
+
+```{r}
+smartphone<- smartphone[-1,]
+colnames(smartphone)<- c("Date","proportion")
+smartphone$Date <- as.Date(paste(smartphone$Date,"01",sep=" "), "%b '%y %d")
+smartphone_clean<-smartphone
+head(smartphone_clean)
+```
+
+### Food expenditures
+
+Removed irrelevant columns
+
+```{r}
+food_expenditures_source_clean<- food_expenditures_source_funds[,c(1,2,8)]
+colnames(food_expenditures_source_clean)<- c("Year","Food at home","Food away from home")
+```
+
+```{r}
+head(food_expenditures_source_clean)
+```
+
+
+### Working hour
+
+Changed the date time format into desired date type
+
+Removed irrelevant Columns
+
+```{r}
+working_hour$date <- as.Date(paste(working_hour$Label,"01",sep=" "), "%Y %b %d")
+working_hour_clean <- working_hour%>%
+  select(Year,week_working_hour=Value,date)
+```
+
+### CPI
+
+After removing the irrelevant columns, we converted the multiple monthly data of "CPI for all" and "CPI for food" to the new column. Then, we adjusted the format of the time to "Year" and "Month". Since the two datasets now have a consistent scale and format, we merge the two data frames together by time.
+
+```{r}
+cpi_change_for_all1<- cpi_change_for_all %>%
+  select(-Annual,-HALF1,-HALF2)%>%
+  pivot_longer(cols = c(2:13), names_to = "Month",values_to = "all_cpi")
+
+cpi_change_for_food1<- cpi_change_for_food %>%
+  select(-HALF1,-HALF2)%>%
+  pivot_longer(cols = c(2:13), names_to = "Month",values_to = "food_cpi")
+
+cpi_change_for_all1$date <- as.Date(paste(cpi_change_for_all1$Year,cpi_change_for_all1$Month,"01",sep=" "), "%Y %b %d")
+
+cpi_change_for_all2<-cpi_change_for_all1[,-(1:2)]
+
+cpi_change_for_food1$date <- as.Date(paste(cpi_change_for_food1$Year,cpi_change_for_food1$Month,"01",sep=" "), "%Y %b %d")
+
+cpi_clean<- full_join(cpi_change_for_food1,cpi_change_for_all2,by='date')
+```
+
+* Combine CPI and working hours
+
+```{r}
+demand_clean<- full_join(cpi_clean,working_hour_clean[,-1],by='date')
+head(demand_clean)
+```
+
+```{r}
+write.csv(food_expenditures_source_clean, file="./data//after cleaning/food_expenditures_source_clean.csv")
+write.csv(demand_clean, file="./data//after cleaning/demand_clean.csv")
+write.csv(smartphone_clean, file="./data//after cleaning/smartphone_clean.csv")
+```
+

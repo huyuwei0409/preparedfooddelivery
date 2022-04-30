@@ -1,1 +1,232 @@
 # Results
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(GGally)
+library(ggmosaic)
+library(redav)
+```
+
+## Food delivery outlook
+
+Let's start with some fundamental data on food delivery, including market share, growth rates for both traditional and online food delivery, industry revenue, and the number of users.
+
+```{r}
+data<- read.csv("data/after cleaning/food_delivery_share.csv")
+ggplot(data, aes(x=Year, y=food_delivery_share_in_food_service,group = 1)) +
+    geom_line(color = "cornflowerblue") +
+    geom_point(shape=21, color="blue", fill="cornflowerblue", size=3) +
+  labs(x = "Year", y = "Food delivery share (among food service)")+
+  theme_bw()+
+    ggtitle("Food delivery share 2013-2019 and forecast")
+```
+
+* We can observe from this line chart that the market share of food delivery has been continuously increasing at a pace of about 0.35 percent per year. 
+* It's worth mentioning that the data source for 2020-2022 is a forecast based on prior year's trends, therefore it displays the same steady rise as the previous year. In reality, due of the pandemic, there may be some significant changes in food delivery share in the food delivery industry.
+
+```{r}
+data<-read.csv("data/after cleaning/food_delivery_world.csv")
+data1<- data %>%
+  pivot_longer(cols = c(3:4), names_to = "name",values_to = "growth")
+data1$name <- gsub("_"," ",data1$name)
+```
+
+```{r}
+ggplot(data1, 
+       aes(growth, fct_reorder2(region, name=="online food delivery", growth, .desc = FALSE),
+           color = name)) +
+  geom_point(size = 3) + 
+  ggtitle("Food delivery growth between 2019 and 2020") + 
+  ylab("")+
+  theme_bw()+
+  labs(color="",x = "Change")+
+  scale_color_manual(values = c("cornflowerblue", "lightcoral"))
+```
+
+* We'll look at the overall growth rate of the different countries as well as online food delivery when it comes to how to order food delivery. We do this by plotting the rate of change on the x-axis and the country on the y-axis, with distinct colored points representing all food delivery and online food delivery. 
+* According to the graph above, between 2009 and 2020, the United States, Russia, Canada, Japan, and Brazil have the highest growth rates in both all food delivery and online food delivery. The growth rate of online food delivery was higher than the growth rate of all food delivery in each of these nations; in fact, more than half of the countries had a substantially higher growth rate of online food delivery. 
+
+```{r}
+data <- read_csv("data/after cleaning/online_food_delivery_outlook.csv")
+data <- data[-(1:5),]
+gr <- ggplot(data, aes(fill=Name, y=Revenue, x=YEAR)) + 
+  geom_bar(position="stack", stat="identity")+
+  scale_fill_manual(values = c("lightcoral", "cornflowerblue"))+
+  theme(legend.position = c(.35, .98),legend.key.size = unit(0.2, 'cm'),legend.text =
+          element_text(size = 8),text = element_text(size = 10),
+        panel.background = element_rect(fill = "grey97"),
+        panel.grid.major = element_line(color = "grey90"),
+        panel.grid.minor = element_line(color = "grey90"))+
+  labs(fill = "",y = "Revenue (in billion dollars)",x = "Year")+
+  ggtitle("Trend of food delivery revenue")
+
+
+gu<- ggplot(data, aes(fill=Name, y=`Users by Segment`, x=YEAR)) + 
+  geom_bar(position="stack", stat="identity")+
+  scale_fill_manual(values = c("lightcoral", "cornflowerblue"))+
+  theme(legend.position = c(.35, .98),legend.key.size = unit(0.2, 'cm'),legend.text =
+          element_text(size = 8),text = element_text(size = 10),
+        panel.background = element_rect(fill = "grey97"),
+        panel.grid.major = element_line(color = "grey90"),
+        panel.grid.minor = element_line(color = "grey90"))+
+  labs(fill = "",y = "User number (in million)",x = "Year")+
+  ggtitle("Trend of food delivery user number")
+
+
+grid.arrange(gr,gu,ncol=2, nrow =1)
+```
+
+* We've divided the revenue from meal delivery into two categories. The first is Platform to Consumer Delivery, which focuses on online delivery services that serve customers with meals from partner restaurants that aren't required to conduct food delivery. Restaurant to Consumer Delivery is the second option, which is a more traditional method of ordering food delivery.
+* The ratio of platform delivery to restaurant delivery is increasing year after year, as shown in the first graph. Restaurant delivery income is roughly 1.5 times that of platform delivery in 2017, and by 2021, restaurant and platform delivery revenue becomes virtually equal. Overall, both companies' revenue is expanding year after year. 
+* The number and ratio of users are trending in the same direction as market revenue. Revenue and user numbers both climbed moderately from 2017 to 2019, before climbing dramatically from 2020 to 2021.
+
+## demand for food delivery analysis
+
+In this section, we look at the causes behind the shift in the food delivery market from the demand side. We look into whether the four aspects, such as smartphone usage, working hours, CPI, and food expenditure, can explain the reasons for the changes in the food delivery business.
+
+### smartphone ownership analysis
+
+```{r}
+data<- read_csv("data/after cleaning/smartphone_clean.csv")
+##plot(data$Date, data$proportion,type="b")
+ggplot(data, aes(x=Date, y=proportion,group = 1)) +
+    geom_line(color = "cornflowerblue") +
+    geom_point(shape=21, color="blue", fill="cornflowerblue", size=3)+
+  labs(x = "Date", y = "Proportion")+
+  theme_bw()+
+    ggtitle("Proportion of smartphone ownership 2011-2021")
+```
+
+* We first expected that smartphone ownership would be associated to online ordering, notably in terms of platform to customer delivery and number of users. Because more individuals are utilizing smartphones, the likelihood of using an ordering APP will increase. 
+* We can observe from this graph that the use of smartphones increased the most rapidly from 2011 to 2016, and that this is due to technological advancements. Because the data in the preceding section is limited for the years 2017 to 2021, we will also concentrate on these years in this section. We can observe that there was no growth from 2017 to 2018, which corresponds to what we saw in the previous section. In the years that followed, smartphone ownership rose slowly, but that was also due to the fact that smartphone ownership was near saturation.
+
+### working hour analysis
+```{r}
+data <- read_csv("data/after cleaning/demand_clean.csv")
+data <- na.omit(data)
+g <- ggplot(data, aes(date, week_working_hour)) + 
+  geom_line(color = "blue") +
+  ggtitle("Population working hour 2012-2022") +
+  labs (x = "", y = "Hours (weekly)") +
+  scale_x_date(date_labels = "%Y", date_breaks = "1 year")+
+  theme_bw(12) +
+  theme(legend.title = element_blank(),axis.text.x=element_text(angle=90, hjust=1))
+
+start <- as.Date("2020-02-01")
+end <- as.Date("2020-06-01")
+
+g+geom_smooth(method = "loess", span = .5, se = FALSE,color = "lightcoral")+
+  annotate("rect", xmin = start, xmax = end, ymin = -Inf, ymax = Inf, fill = "cornflowerblue", alpha = .2) 
+```
+
+* We assumed in this section that when working hours increased, the market share and users of food delivery would increase as well, because the amount of time people spend preparing their own food and dining in would decrease.
+* Overall, between 2012 and 2019, the population's working hour did not change much, although it ebbed and flowed, hovering around 34.5 hours per week. Hours worked dipped substantially during the Covid-19 in 2020 before fast rising, and have risen and fallen dramatically since then, but are still higher generally than before.
+* When compared to our prior market analysis, these large shifts in work hours do not appear to have had an impact on our market, since the long-term trend in work hours is still increasing, which supports our theory that longer work hours will lead to an increase in food delivery users and the market revenue. 
+
+### cpi analysis
+
+```{r}
+df <- data[,-1] %>% 
+  gather(key = class, value = CPI, -c(Year, Month, date, week_working_hour)) %>%
+  mutate(class = forcats::fct_reorder2(class, date, CPI))
+
+g<-ggplot(df, aes(date, CPI, color = class)) + 
+  geom_line() + 
+  ggtitle("CPI change for food and all") +
+  labs (x = "", y = "Change") +
+  scale_x_date(date_labels = "%Y", date_breaks = "1 year")+
+  theme_bw(12) +
+  theme(legend.title = element_blank(),axis.text.x=element_text(angle=90, hjust=1))+
+  scale_color_manual(labels = c("All", "Food"), values = c("cornflowerblue", "lightcoral"))
+g
+```
+
+* Our CPI(Consumer Price Index) analysis, unlike the prior demand analysis, is based on the assumption that inflation will overstate market growth. In its most basic form, CPI implies that we determine the amount and kind of commodities at the onset, and that this aspect does not vary over time; only the price of goods fluctuates. This concept suggests that if the CPI is too high, inflation is rising, and the food delivery market, which may have been growing swiftly at first, is now being overvalued as the price index rises. What we need to do is to remove the impact of CPI from the market in our analysis. Of course, CPI has no bearing on market share, it only affects the nominal value.
+* In this time series graph, we depict the overall CPI and the food CPI separately. The graph shows that the change in CPI is fairly similar to the previous figure, ranging about 0 from 2012 to 2020, with some sporadic large changes. Furthermore, both food and total CPI changes are in one direction and follow the same pattern. And the changes after 2020 are extremely dramatic. First, the food CPI changes by 1.5 in 2020, implying that our earlier food market revenue estimates may be significantly overstated, although we can't quantify this overestimation here due to the complexities of calculations. After that, the overall food CPI increased in long term trend.
+* We could infer from price index analysis that the food delivery market's revenue and growth are not as high as they appear. One of the primary reasons is that food prices have risen, resulting in an increase in the food delivery market's revenue, which may not be as significant if the quantity of food sold is the only factor. This may also be observed in the number of users, as the rise in revenue of the food delivery market is more substantial than the number of users.
+
+### food expenditure analysis
+
+```{r}
+data <- read_csv("data/after cleaning/food_expenditures_source_clean.csv")
+data<- data[-(1:13),-1]
+
+data1<- data %>%
+  pivot_longer(cols = c(2:3), names_to = "where", values_to = "expenditure")
+##ggplot(data1)+ 
+##  geom_mosaic(aes(x = product(where, Year),weight = expenditure, fill = where))+
+##  ggtitle("Food expenditures (million dollars) by households")
+
+ggplot(data1, aes(fill=where, y=expenditure, x=as.character(Year))) + 
+    geom_bar(position="fill", stat="identity")+
+  scale_fill_manual(values = c("lightcoral", "cornflowerblue"))+
+  ggtitle("Food expenditures by households")+
+  labs (x = "Year", y = "Expenditures (million dollars)")+
+  theme_bw()
+```
+
+* We first assumed that as the market share of food delivery grew, so would household food consumption away from home. However, from 2010 to 2020, the ratio of food consumed at home to food expenditure away from home stayed at 1. Only during the 2020 outbreak did the percentage of food expenditure spent at home rise slightly, but not significantly.
+
+## supply for food delivery analysis
+
+In this section, we examine the relation between key supply-side issues and the food delivery market. These factors include working earning, the number of restaurants, the unemployment rate, and educational level.
+
+```{r}
+data <- read_csv("data/after cleaning/supply_clean.csv")
+data <- na.omit(data)
+data1<- read.csv("data/after cleaning/food_delivery_share.csv")
+data$Year<- as.character(data$Year)
+data2 <- full_join(data[,-1],data1[,-1],by='Year') 
+data2 <- na.omit(data2)
+colnames(data2)<-c("Year","Working earning", "Restaurant number","Unemployment","Food delivery share")
+
+ggpairs(data2[2:5])+
+  ggtitle("Correlogram of Each Pairs")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r}
+ggcorr(data2[2:5]) +
+  ggtitle("Heatmap of Correlations")+
+  scale_fill_gradient2(low = "cornflowerblue", high = "lightcoral",mid = "white",midpoint = 0)
+```
+
+* We originally expected that when working earning rises, the percentage of people who spend money on food delivery will rise as well, because food delivery will be more expensive than other options. And, as previously said, a rise in the number of restaurants would result in an increase in the percentage of the food delivery market, because one of the methods of food delivery is restaurant-to-customer. In addition, the unemployment rate should be inversely proportional to the food delivery market share.
+* Working earnings and the number of restaurants are positively correlated with the food delivery market, as shown by the correlogram and heatmap, and the correlation coefficient is strong, near to one, indicating a perfect positive association. Food delivery market share grows as the number of restaurants and working incomes grows, and vice versa. On the other hand, the average unemployment rate is negatively correlated to the food delivery market share.
+
+```{r}
+draw_biplot(data[,-1])+
+  theme_bw()
+```
+
+* The market share of each year is quite well distributed for the most part, but there is one outlier, which is the year 2020.
+* The year 2019 features high working-earnings and restaurant-number values.
+
+```{r}
+data <- read_csv("data/after cleaning/education_clean.csv")
+data <- data%>%
+  group_by(Year)%>%
+  mutate(freq = value / sum(value))%>%
+  ungroup()
+
+theme_heat <- theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.ticks = element_blank())
+
+ggplot(data, aes(x = as.character(Year), y = degree,fill = freq)) + 
+  geom_tile(color = "white") + 
+  coord_equal() + 
+  theme_heat+
+  scale_fill_gradient2(low = "cornflowerblue", high = "lightcoral",mid = "white",midpoint = 0.15)+
+#  scale_fill_viridis_c(option="inferno")+
+  labs (x = "Year", y = "Education attainment (25 years and over)")+
+  ggtitle("Education attainment 2000-2021")
+```
+
+* Because there is no high education threshold for delivery, we initially assumed that the delivery staff's education level would be low. As a result, when the general number of people without high education level is large, the supply side of delivery will increase. However, we can see from this graph overall education level is improving year after year, indicating that there is no specific relationship between the two.
+
+
+

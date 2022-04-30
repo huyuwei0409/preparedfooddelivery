@@ -1,1 +1,49 @@
 # Missing values
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(mi)
+library(extracat)
+library(forcats)
+```
+
+## Data Source 1 
+
+After data cleaning in the last section, we end up with 8 datasets, two of which contain missing values.
+
+```{r}
+supply_clean <- read.csv(file = "data/after cleaning/supply_clean.csv")
+extracat::visna(supply_clean, col = "Orange")
+```
+
+For our data frame, this means: Variable working earnings have all their missing values at the end of my data frame. For variable restaurant numbers, the missing values are distributed at the end of the data frame and more than the variable working earnings. And for the upper part of this dataset have complete rows for the respective bin of data. 
+
+It is normal for the missing data to come from 2021 and 2022. Two of these data need to be calculated after a full year of statistics and our unemployment rate is calculated from the monthly data.
+
+## Data Source 2
+
+```{r}
+demand_clean <- read.csv(file = "data/after cleaning/demand_clean.csv")
+x2 <- missing_data.frame(demand_clean)
+df_na <- data.frame(percent=round(colSums(is.na(x2))/nrow(x2)*100))
+df_na$keyFeatures <- rownames(df_na)
+ggplot(df_na, aes(fct_reorder(keyFeatures,percent, .desc = TRUE), percent)) + 
+  geom_col(fill = "orange")+
+  xlab("Features")+
+  ylab("Percentage") + 
+  ggtitle("Percentage of NAs of Main Features")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        panel.background = element_rect(fill = "grey97"),
+        panel.grid.major = element_line(color = "grey90"),
+        panel.grid.minor = element_line(color = "grey90"))+
+  scale_x_discrete(label=function(x) abbreviate(x, minlength=7))
+```
+
+```{r}
+image(x2)
+```
+
+The two plots show that "food_cpi" has the highest number of missing values, month and year, and "all_cpi" and "week_working hour" have the same missing value pattern and percentage. 
+
+For "food_cpi", it is missing data for the years 2010, 2011, and the second half of 2022. As for the variables "Year" and "Month", the data are missing due to data joining during the data cleaning phase. 

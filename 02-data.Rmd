@@ -1,2 +1,177 @@
 # Data sources
 
+```{r}
+library(readxl)
+library(tidyverse)
+```
+
+## Describe the data sources
+
+The goal of our project is to analyze the food delivery market, which includes but is not limited to the restaurant and foodservice industry and online food delivery over the U.S. To understand the scale and growth of the food delivery market, we collected data from NPD Group: National Purchase Diary Panel (https://www.npd.com), which measures how consumers shop across channels and quantitive sales, share, distribution, and velocity, and Statista(https://www.statista.com/outlook/dmo/eservices/online-food-delivery/united-states), a business data platform across different industries and countries. These datasets are easily accessible through either custom search or well-organized industry segment. We obtained the data sets of the restaurant food delivery growth, the share of delivery sales in the foodservice market, and revenue/average revenue per User/penetration rate of different types of food delivery market. 
+
+One perspective of our analysis is from the main macroeconomic aim of the supply side of food delivery. The data we collected included population which is divided by unemployment, smartphone ownership and education level (over 25). The data was obtained from the United States Census Bureau(https://www.census.gov/topics.html) and the Bureau of Labor Statistics(https://www.bls.gov/iag/tgs/iag722.html). From the microeconomic aim of the supply side, we collected the data on the average hourly earnings of food service, the number of private restaurants number, the monthly employment of all restaurants, and quick-service restaurants which we believe will have a higher percentage of food delivery service. 
+
+We are also interested in the demand side of food delivery and the underlying connection between them. Part of the data in this section was collected from the United States Department of Agriculture(https://www.ers.usda.gov/data-products/food-expenditure-series/) and Pew Research Center(https://www.pewresearch.org/internet/fact-sheet/mobile/). We believe the impact of change in food expenditure and CPI change for food should be deducted from the growth of food delivery, otherwise, the food delivery market will be overvalued.  We also think the change in working hours is correlated with the tendency of ordering the food delivery.
+
+## Basic information about the food delivery datasets
+
+```{r}
+food_delivery_2019_2020 <- read_excel("data/food delivery data/food delivery 2019-2020.xlsx", sheet = "Data", skip = 4)
+```
+
+**food delivery 2019-2020.xlsx**
+
+* ...1: Countries
+* all: Growth of food delivery from 2019 to 2020 by all channel order
+* digital: Growth of food delivery from 2019 to 2020 by digital order
+
+```{r}
+online_food_delivery_2017_2021 <- read_csv("data/food delivery data/online food delivery 2017-2021.csv")
+```
+
+**online food delivery 2017-2021.csv**
+
+1. Market
+* eServices
+* Online Food Delivery
+* Platform-to-Consumer Delivery
+* Restaurant-to-Consumer Delivery
+2. Chart
+* Average Revenue per User
+* Average Revenue per User by Segment
+* Penetration Rate
+* Penetration Rate by Segment
+* Revenue
+* Revenue Change
+* Usage Shares
+* Users 
+* Users by Age
+* Users by Gender
+* Users by Income
+* Users by Segment
+```{r}
+share_of_delivery_in_food_service_2013_2022 <- read_excel("data/food delivery data/share of delivery in food service 2013-2022.xlsx", sheet = "Data", skip = 3)
+```
+
+**share of delivery in food service 2013-2022.xlsx**
+
+* share: Proportion of food service sales in the United States which are made via delivery from 2013 to 2022
+
+
+
+## Basic information about the supply for food delivery datasets
+
+```{r}
+unemployment <- read_csv("data/population/unemployment 2010-2022.csv")
+```
+
+**unemployment 2010-2022.csv**
+
+* Series ID: Table name
+* Year: Year(2010-2022)
+* Period: Month(M + number)
+* Label: Year(xxxx) + Month(xxx)
+* Value: Unemployment in percentage w/o %
+
+```{r}
+education <- read_excel("data/population/education by 2020.xlsx", skip = 3)
+```
+
+**education by 2020.xlsx**
+
+1. row: Detailed years of school
+* Elementary or High school, no diploma		
+* Elementary or High school, GED																																			* College, no degree
+* Associate's degree, vocational
+* Associate's degree, academic
+* Bachelor's degree1
+* Graduate school, no master's degree1
+* Master's degree programs1																																						* Professional or Doctorate degree
+2. col: Year(2000-2021)
+
+```{r}
+private_restaurant_number <- read_excel("data/supply/private restaurant number.xlsx", skip = 12)
+```
+
+**private restaurant number.xlsx**
+
+* Year: 2010-2021	
+* Qtr1: The number of private restaurant in the 1st quarter
+* Qtr2:	The number of private restaurant in the 2nd quarter
+* Qtr3: The number of private restaurant in the 3rd quarter
+* Qtr4: The number of private restaurant in the 4th quarter
+* Annual: The number of private restaurant in whole year
+
+```{r}
+annual_restaurant_worker_earning <- read_excel("data/supply/annual restaurant worker earning.xlsx", skip = 12)
+```
+
+**annual restaurant worker earning.xlsx**
+
+* Year: 2010-2021
+* Annual: AVERAGE HOURLY EARNINGS OF ALL EMPLOYEES
+
+## Basic information about the demand for food delivery datasets
+
+```{r}
+food_expenditures_source_funds <- read_csv("data/exp and cpi/food_expenditures_source_funds.csv")
+```
+
+**food_expenditures_source_funds.csv**
+
+* FAH expenditures million nominal dollars by households
+* FAH expenditures million nominal dollars by home production
+* FAH expenditures million nominal dollars by government
+* FAFH expenditures million nominal dollars by households
+* FAFH expenditures million nominal dollars by home production
+* FAFH expenditures million nominal dollars by government
+
+Note:
+
+* FAH means Food at Home, FAFH means Food Away From Home
+* It also includes the price adjusted value of food expenditure
+
+```{r}
+cpi_change_for_food <- read_excel("data/exp and cpi/cpi change for food.xlsx", skip = 10)
+```
+
+**cpi change for food.xlsx**
+
+* Year: 2012-2022
+* columns: Jan-Dec, HALF1, HALF2
+
+```{r}
+cpi_change_for_all <- read_excel("data/exp and cpi/cpi change for all.xlsx", skip = 10)
+```
+
+**cpi change for all.xlsx**
+
+* Year: 2010-2022
+* columns: Jan-Dec, Annual, HALF1, HALF2
+
+```{r}
+working_hour <- read_csv("data/working hour/working_hour_weekly.csv")
+```
+
+**working_hour_weekly.csv**
+
+* Series ID: Table name
+* Year: Year(2010-2022)
+* Period: Month(M + number)
+* Label: Year(xxxx) + Month(xxx)
+* Value: Working hours in week
+
+```{r}
+smartphone <- read_excel("data/population/smartphone.xlsx", sheet = "Data", skip = 3)
+```
+
+**smartphone.xlsx**
+
+* Month(xxx)+Year(xx)
+* proportion of smartphone ownership
+
+## Describe any issues with the data
+
+Our initial idea is to create a choropleth map of percentage change of market revenue or share over time in the U.S. The data about food delivery, however, is not sufficient since it is a new service. 
+
+The year range of datasets is not consistent. The datasets collected from the government website tend to have a wider time range, we have to adjust our time range to make them on the same scale.

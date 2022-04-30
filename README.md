@@ -1,8 +1,9 @@
-We will focus on online prepared food delivery which includes restaurant websites, food ordering platforms, and delivery apps in China and the U.S. First, we will compare the online prepared food delivery between China and the U.S., including but not limited to the market size, provider’s market share, active users, and usage rate. After knowing the quantitative number and trends, we will identify the reasons for the changes in each country and reasons for the gap between the two countries, from the economic perspective.
+Our food ordering options are becoming more and more diverse as we move into the future era of cross-border integration, new technology, and applications. Online food delivery, in comparison to traditional restaurants, is a relatively new option for people nowadays, particularly during epidemics. Food delivery is already a significant and developed market in China, with numerous mature studies available on the internet. However, there is a dearth of reporting and statistics in the United States. 
+We launched this research to better understand the present food delivery market in the United States and the variables that contribute to its growth.
 
 https://huyuwei0409.github.io/preparedfooddelivery/
 
-*This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.
+Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
 
 
 

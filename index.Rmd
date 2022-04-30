@@ -7,3 +7,9 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+Our food ordering options are becoming more and more diverse as we move into the future era of cross-border integration, new technology, and applications. Online food delivery, in comparison to traditional restaurants, is a relatively new option for people nowadays, particularly during epidemics. Food delivery is already a significant and developed market in China, with numerous mature studies available on the internet. However, there is a dearth of reporting and statistics in the United States. 
+We launched this research to better understand the present food delivery market in the United States and the variables that contribute to its growth.We are going to present our analysis in three parts:
+
+1. Food delivery market overview and growth
+2. Factors that affect the degree of development from a demand perspective
+3. Factors that affect the degree of development from a supply perspective
