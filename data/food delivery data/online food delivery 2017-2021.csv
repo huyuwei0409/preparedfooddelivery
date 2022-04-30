@@ -1,0 +1,59 @@
+﻿Region,Market,Chart,Name,Unit,Source,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026
+United States,eServices,Revenue,Total,billion USD (US$),Statista,74,80.16,89.12,98.24,121.6,157.2,183.3,206.6,227.3,245.5
+United States,eServices,Revenue,Dating Services,billion USD (US$),Statista,1.028,1.174,1.29,1.518,1.655,1.713,1.76,1.805,1.849,1.895
+United States,eServices,Revenue,Event Tickets,billion USD (US$),Statista,19.1,20.66,22.57,6.417,10.63,26.57,30.42,32.15,33.68,35.27
+United States,eServices,Revenue,Online Food Delivery,billion USD (US$),Statista,23.35,26.53,30.98,44.13,56.92,66.56,76.15,84.88,91.59,96.37
+United States,eServices,Revenue Change,Total,percent,Statista,,8.324,11.178,10.233,23.779,29.276,16.603,12.711,10.019,8.007
+United States,eServices,Revenue Change,Dating Services,percent,Statista,,14.202,9.881,17.674,9.025,3.505,2.744,2.557,2.438,2.488
+United States,eServices,Revenue Change,Event Tickets,percent,Statista,,8.168,9.245,-71.568,65.654,149.953,14.49,5.687,4.759,4.721
+United States,eServices,Revenue Change,Online Food Delivery,percent,Statista,,13.619,16.773,42.447,28.983,16.936,14.408,11.464,7.905,5.219
+United States,eServices,Average Revenue per User by Segment,Dating Services,USD (US$),Statista,25.6,24.29,23.67,25.27,26.01,26.05,26.11,26.23,26.34,26.35
+United States,eServices,Average Revenue per User by Segment,Event Tickets,USD (US$),Statista,165.5,173,182.2,221.4,271.4,216.3,224.3,232.6,239.6,245.8
+United States,eServices,Average Revenue per User by Segment,Online Food Delivery,USD (US$),Statista,287.7,296,308.1,334.8,379.5,398.1,414,427.1,436.6,443.5
+United States,eServices,Users by Segment,Dating Services,million users,Statista,40.167,48.345,54.513,60.073,63.628,65.76,67.404,68.809,70.213,71.911
+United States,eServices,Users by Segment,Event Tickets,million users,Statista,115.35,119.442,123.856,28.981,39.169,122.875,135.591,138.22,140.586,143.505
+United States,eServices,Users by Segment,Online Food Delivery,million users,Statista,81.172,89.61,100.552,131.807,149.978,167.217,183.969,198.746,209.768,217.305
+United States,eServices,Penetration Rate by Segment,Dating Services,percent,Statista,12.356,14.78,16.566,18.149,19.112,19.641,20.02,20.325,20.627,21.011
+United States,eServices,Penetration Rate by Segment,Event Tickets,percent,Statista,35.483,36.516,37.639,8.755,11.766,36.7,40.273,40.828,41.3,41.93
+United States,eServices,Penetration Rate by Segment,Online Food Delivery,percent,Statista,24.969,27.396,30.557,39.821,45.05,49.945,54.642,58.706,61.624,63.493
+United States,Restaurant-to-Consumer Delivery,Revenue,Total,billion USD (US$),Statista,14.09,15.81,18.07,24.65,28.79,32.32,36.07,39.13,41.35,42.83
+United States,Restaurant-to-Consumer Delivery,Revenue Change,Total,percent,Statista,,12.207,14.295,36.414,16.795,12.261,11.603,8.484,5.673,3.579
+United States,Restaurant-to-Consumer Delivery,Average Revenue per User,Total,USD (US$),Statista,236.2,241.5,246.8,256.7,263.1,266.1,268.3,269.7,270.7,271.5
+United States,Restaurant-to-Consumer Delivery,Users,Total,million users,Statista,59.661,65.472,73.198,96.062,109.407,121.443,134.458,145.075,152.731,157.742
+United States,Restaurant-to-Consumer Delivery,Penetration Rate,Total,percent,Statista,18.352,20.016,22.244,29.021,32.863,36.273,39.937,42.853,44.868,46.09
+United States,Online Food Delivery,Users by Age,18-24 years,percent,"Statista,Statista Global Consumer Survey",,,,,15.865,,,,,
+United States,Online Food Delivery,Users by Age,25-34 years,percent,"Statista,Statista Global Consumer Survey",,,,,26.778,,,,,
+United States,Online Food Delivery,Users by Age,35-44 years,percent,"Statista,Statista Global Consumer Survey",,,,,24.059,,,,,
+United States,Online Food Delivery,Users by Age,45-54 years,percent,"Statista,Statista Global Consumer Survey",,,,,19.386,,,,,
+United States,Online Food Delivery,Users by Age,55-64 years,percent,"Statista,Statista Global Consumer Survey",,,,,13.912,,,,,
+United States,Online Food Delivery,Users by Gender,female,percent,"Statista,Statista Global Consumer Survey",,,,,51.36,,,,,
+United States,Online Food Delivery,Users by Gender,male,percent,"Statista,Statista Global Consumer Survey",,,,,48.64,,,,,
+United States,Online Food Delivery,Users by Income,high income,percent,"Statista,Statista Global Consumer Survey",,,,,36.645,,,,,
+United States,Online Food Delivery,Users by Income,low income,percent,"Statista,Statista Global Consumer Survey",,,,,30.963,,,,,
+United States,Online Food Delivery,Users by Income,medium income,percent,"Statista,Statista Global Consumer Survey",,,,,32.393,,,,,
+United States,Online Food Delivery,Usage Shares,Other,percent,Statista,,,,15,,,,,,
+United States,Online Food Delivery,Usage Shares,Dominos,percent,Statista,,,,5,,,,,,
+United States,Online Food Delivery,Usage Shares,Doordash,percent,Statista,,,,40,,,,,,
+United States,Online Food Delivery,Usage Shares,Grubhub,percent,Statista,,,,15,,,,,,
+United States,Online Food Delivery,Usage Shares,Uber Eats,percent,Statista,,,,20,,,,,,
+United States,Online Food Delivery,Usage Shares,Yum! Brands,percent,Statista,,,,5,,,,,,
+United States,Online Food Delivery,Revenue,Total,billion USD (US$),Statista,23.35,26.53,30.98,44.13,56.92,66.56,76.15,84.88,91.59,96.37
+United States,Online Food Delivery,Revenue,Platform-to-Consumer Delivery,billion USD (US$),Statista,9.261,10.72,12.91,19.48,28.12,34.24,40.08,45.75,50.24,53.54
+United States,Online Food Delivery,Revenue,Restaurant-to-Consumer Delivery,billion USD (US$),Statista,14.09,15.81,18.07,24.65,28.79,32.32,36.07,39.13,41.35,42.83
+United States,Online Food Delivery,Revenue Change,Total,percent,Statista,,13.619,16.773,42.447,28.983,16.936,14.408,11.464,7.905,5.219
+United States,Online Food Delivery,Revenue Change,Platform-to-Consumer Delivery,percent,Statista,,15.754,20.429,50.891,44.353,21.764,17.056,14.147,9.814,6.568
+United States,Online Food Delivery,Revenue Change,Restaurant-to-Consumer Delivery,percent,Statista,,12.207,14.295,36.414,16.795,12.261,11.603,8.484,5.673,3.579
+United States,Online Food Delivery,Average Revenue per User by Segment,Total,thousand USD (US$),Statista,0.288,0.296,0.308,0.335,0.38,0.398,0.414,0.427,0.437,0.444
+United States,Online Food Delivery,Average Revenue per User by Segment,Platform-to-Consumer Delivery,thousand USD (US$),Statista,0.231,0.239,0.255,0.294,0.374,0.405,0.436,0.459,0.475,0.486
+United States,Online Food Delivery,Average Revenue per User by Segment,Restaurant-to-Consumer Delivery,thousand USD (US$),Statista,0.236,0.241,0.247,0.257,0.263,0.266,0.268,0.27,0.271,0.272
+United States,Online Food Delivery,Users by Segment,Total,million users,Statista,81.172,89.61,100.552,131.807,149.978,167.217,183.969,198.746,209.768,217.305
+United States,Online Food Delivery,Users by Segment,Platform-to-Consumer Delivery,million users,Statista,40.12,44.821,50.659,66.255,75.249,84.632,91.958,99.593,105.646,110.088
+United States,Online Food Delivery,Users by Segment,Restaurant-to-Consumer Delivery,million users,Statista,59.661,65.472,73.198,96.062,109.407,121.443,134.458,145.075,152.731,157.742
+United States,Online Food Delivery,Penetration Rate by Segment,Total,percent,Statista,24.969,27.396,30.557,39.821,45.05,49.945,54.642,58.706,61.624,63.493
+United States,Online Food Delivery,Penetration Rate by Segment,Platform-to-Consumer Delivery,percent,Statista,12.341,13.703,15.395,20.016,22.603,25.278,27.313,29.418,31.036,32.166
+United States,Online Food Delivery,Penetration Rate by Segment,Restaurant-to-Consumer Delivery,percent,Statista,18.352,20.016,22.244,29.021,32.863,36.273,39.937,42.853,44.868,46.09
+United States,Platform-to-Consumer Delivery,Revenue,Total,billion USD (US$),Statista,9.261,10.72,12.91,19.48,28.12,34.24,40.08,45.75,50.24,53.54
+United States,Platform-to-Consumer Delivery,Revenue Change,Total,percent,Statista,,15.754,20.429,50.891,44.353,21.764,17.056,14.147,9.814,6.568
+United States,Platform-to-Consumer Delivery,Average Revenue per User,Total,thousand USD (US$),Statista,0.231,0.239,0.255,0.294,0.374,0.405,0.436,0.459,0.475,0.486
+United States,Platform-to-Consumer Delivery,Users,Total,million users,Statista,40.12,44.821,50.659,66.255,75.249,84.632,91.958,99.593,105.646,110.088
+United States,Platform-to-Consumer Delivery,Penetration Rate,Total,percent,Statista,12.341,13.703,15.395,20.016,22.603,25.278,27.313,29.418,31.036,32.166
