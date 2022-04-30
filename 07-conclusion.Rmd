@@ -5,7 +5,7 @@
 Based on our analysis of the food delivery market, we have the following finds:
 
 * We observed that the increase in market share was approximately equivalent, however the increase in revenue has altered dramatically in recent years. This shift can be explained by an increase in time worked and earnings, as well as an increase in the number of restaurants.
-*Surprisingly, the number of users has not increased at the same rate as revenue, and we assume this is due to inflation. This disparity is clearly explained by our CPI analysis, which is the nominal value is overestimated by the inflation.
+* Surprisingly, the number of users has not increased at the same rate as revenue, and we assume this is due to inflation. This disparity is clearly explained by our CPI analysis, which is the nominal value is overestimated by the inflation.
 
 ## Limitation
 
