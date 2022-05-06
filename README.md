@@ -3,7 +3,7 @@ We launched this research to better understand the present food delivery market 
 
 https://huyuwei0409.github.io/preparedfooddelivery/
 
-Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
+This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.
 
 
 
